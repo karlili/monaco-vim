@@ -1045,11 +1045,11 @@ var Vim = function () {
 
   var numberRegex = /[\d]/;
   var wordCharTest = [
-    CodeMirror.isWordChar,
-    function (ch) {
-      return ch && !CodeMirror.isWordChar(ch) && !/\s/.test(ch);
-    },
-  ],
+      CodeMirror.isWordChar,
+      function (ch) {
+        return ch && !CodeMirror.isWordChar(ch) && !/\s/.test(ch);
+      },
+    ],
     bigWordCharTest = [
       function (ch) {
         return /\S/.test(ch);
@@ -1519,10 +1519,10 @@ var Vim = function () {
       } else if (name.indexOf(prefix) !== 0) {
         throw new Error(
           '(Vim.defineEx) "' +
-          prefix +
-          '" is not a prefix of "' +
-          name +
-          '", command not registered'
+            prefix +
+            '" is not a prefix of "' +
+            name +
+            '", command not registered'
         );
       }
       exCommands[name] = func;
@@ -1706,8 +1706,8 @@ var Vim = function () {
       if (command === false) {
         return !vim.insertMode && key.length === 1
           ? function () {
-            return true;
-          }
+              return true;
+            }
           : undefined;
       } else if (command === true) {
         // TODO: Look into using CodeMirror's multi-key handling.
@@ -2735,9 +2735,9 @@ var Vim = function () {
       if (pos) {
         return motionArgs.linewise
           ? {
-            line: pos.line,
-            ch: findFirstNonWhiteSpaceCharacter(cm.getLine(pos.line)),
-          }
+              line: pos.line,
+              ch: findFirstNonWhiteSpaceCharacter(cm.getLine(pos.line)),
+            }
           : pos;
       }
       return null;
@@ -3321,11 +3321,11 @@ var Vim = function () {
       var text = cm.getSelection();
       var endPos = vim.visualMode
         ? cursorMin(
-          vim.sel.anchor,
-          vim.sel.head,
-          ranges[0].head,
-          ranges[0].anchor
-        )
+            vim.sel.anchor,
+            vim.sel.head,
+            ranges[0].head,
+            ranges[0].anchor
+          )
         : oldAnchor;
       vimGlobalState.registerController.pushText(
         args.registerName,
@@ -3544,8 +3544,8 @@ var Vim = function () {
           subMode: vim.visualLine
             ? "linewise"
             : vim.visualBlock
-              ? "blockwise"
-              : "",
+            ? "blockwise"
+            : "",
         });
         updateCmSelection(cm);
         updateMark(cm, vim, "<", cursorMin(anchor, head));
@@ -3562,8 +3562,8 @@ var Vim = function () {
           subMode: vim.visualLine
             ? "linewise"
             : vim.visualBlock
-              ? "blockwise"
-              : "",
+            ? "blockwise"
+            : "",
         });
         updateCmSelection(cm);
       } else {
@@ -3597,8 +3597,8 @@ var Vim = function () {
           subMode: vim.visualLine
             ? "linewise"
             : vim.visualBlock
-              ? "blockwise"
-              : "",
+            ? "blockwise"
+            : "",
         });
       }
     },
@@ -3639,9 +3639,6 @@ var Vim = function () {
       cm.setCursor(curFinalPos);
     },
     newLineAndEnterInsertMode: function (cm, actionArgs, vim) {
-      if (cm.getOption("readOnly")) {
-        return;
-      }
       vim.insertMode = true;
       var insertAt = copyCursor(cm.getCursor());
       if (insertAt.line === cm.firstLine() && !actionArgs.after) {
@@ -3909,8 +3906,8 @@ var Vim = function () {
         numberStr = number.toString(base);
         var zeroPadding = baseStr
           ? new Array(
-            digits.length - numberStr.length + 1 + match[1].length
-          ).join("0")
+              digits.length - numberStr.length + 1 + match[1].length
+            ).join("0")
           : "";
         if (numberStr.charAt(0) === "-") {
           numberStr = "-" + baseStr + zeroPadding + numberStr.substr(1);
@@ -4018,14 +4015,14 @@ var Vim = function () {
       return pressedPrefix == mappedPrefix && pressed.length > prefixLen
         ? "full"
         : mappedPrefix.indexOf(pressedPrefix) == 0
-          ? "partial"
-          : false;
+        ? "partial"
+        : false;
     } else {
       return pressed == mapped
         ? "full"
         : mapped.indexOf(pressed) == 0
-          ? "partial"
-          : false;
+        ? "partial"
+        : false;
     }
   }
   function lastChar(keys) {
@@ -5257,7 +5254,7 @@ var Vim = function () {
 
   // Search functions
   defineOption("pcre", true, "boolean");
-  function SearchState() { }
+  function SearchState() {}
   SearchState.prototype = {
     getQuery: function () {
       return vimGlobalState.query;
@@ -5780,7 +5777,7 @@ var Vim = function () {
 
   function getLastEditPos(cm) {
     var done = cm.doc.history.done;
-    for (var i = done.length; i--;) {
+    for (var i = done.length; i--; ) {
       if (done[i].changes) {
         return copyCursor(done[i].changes[0].to);
       }
@@ -6232,20 +6229,20 @@ var Vim = function () {
       var numberRegex = pattern
         ? pattern
         : number == "decimal"
-          ? /(-?)([\d]+)/
-          : number == "hex"
-            ? /(-?)(?:0x)?([0-9a-f]+)/i
-            : number == "octal"
-              ? /([0-7]+)/
-              : null;
+        ? /(-?)([\d]+)/
+        : number == "hex"
+        ? /(-?)(?:0x)?([0-9a-f]+)/i
+        : number == "octal"
+        ? /([0-7]+)/
+        : null;
       var radix =
         number == "decimal"
           ? 10
           : number == "hex"
-            ? 16
-            : number == "octal"
-              ? 8
-              : null;
+          ? 16
+          : number == "octal"
+          ? 8
+          : null;
       var numPart = [],
         textPart = [];
       if (number || pattern) {
@@ -6395,7 +6392,7 @@ var Vim = function () {
       if (!cm.getSearchCursor) {
         throw new Error(
           "Search feature not available. Requires searchcursor.js or " +
-          "any other getSearchCursor implementation."
+            "any other getSearchCursor implementation."
         );
       }
       var argString = params.argString;
